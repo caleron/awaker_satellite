@@ -26,6 +26,7 @@ void setup() {
 }
 
 int lastFreeMemory = freeMemory();
+uint8_t counter = 0;
 
 void loop() {
     int newFreeMemory = freeMemory();
@@ -35,10 +36,15 @@ void loop() {
         lastFreeMemory = newFreeMemory;
     }
 
+    counter = (counter + 1) % 50;
+    if (counter == 0) {
+        Serial.println("still running");
+    }
+
     Net::update();
 
     AnalogControls::check();
-    //Buttons::check();
+    Buttons::check();
     delay(100);
     Net::receive();
 }

@@ -66,7 +66,7 @@ namespace Net {
         byte payload = index;
         byte type = static_cast<byte>(MessageType::BUTTON_PUSHED);
 
-        //send(&payload, type, sizeof(payload));
+        send(&payload, type, sizeof(payload));
     }
 
     void send(const void *data, uint8_t msg_type, size_t size) {

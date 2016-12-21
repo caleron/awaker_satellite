@@ -13,9 +13,9 @@ namespace Buttons {
      */
     void setup() {
         for (byte i = 0; i < button_count; ++i) {
-            pinMode(button_pins[i], INPUT);
+            //pinMode(button_pins[i], INPUT);
             //evtl Input mit internem pull-up verwenden
-            //pinMode(button_pins[i], INPUT_PULLUP);
+            pinMode(button_pins[i], INPUT_PULLUP);
         }
     }
 
@@ -27,11 +27,12 @@ namespace Buttons {
         for (byte i = 0; i < button_count; ++i) {
             val = digitalRead(button_pins[i]);
 
-            if (val == HIGH && !button_pressed[i]) {
-                //event auslösen
+            if (val == LOW && !button_pressed[i]) {
+                //butten gedrückt, event auslösen
                 Net::button_pressed(i);
                 button_pressed[i] = true;
-            } else if (val == LOW) {
+            } else if (val == HIGH) {
+                //button nicht gedrückt, high wegen pull-up
                 button_pressed[i] = false;
             }
         }
